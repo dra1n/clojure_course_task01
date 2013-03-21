@@ -3,19 +3,19 @@
   (:gen-class))
 
 (defn take-href [node]
-  "Закладывается на определенную структуру ноды.
-  Принимает ту самую обертку с классом r"
+  "Takes link wrapper those with class 'r'.
+   Finds there a link and returns its href attribute."
   (:href ((node 2) 1)))
 
 (defn class-r-node? [node]
-  "Проверяет является ли данная нода нужной нам оберткой с классом r"
+  "Checks if passed node is the right one, i. e. has class 'r'"
   (and (vector? node)
        (= "r" (:class (node 1)))))
 
 (declare find-in-children)
 
 (defn link-wrappers [node]
-  "Никакой хвостовой рекурсии не получилось. При огромном дереве fail"
+  "Gathers all nodes with class 'r' in one vector."
   (if (vector? node)
     (let [content (children node)
           found (filter class-r-node? content)]
@@ -24,8 +24,8 @@
         found))))
 
 (defn find-in-children [acc node]
-  "Взаимно рекурсивная с link-wrappers функция.
-  Нужна для свертки детей очередной ноды"
+  "Accumulates all nodes with class 'r' into acc.
+   For this recursively calls link-wrappers."
   (let [found (link-wrappers node)]
     (if (empty? found) acc (concat acc found))))
 
