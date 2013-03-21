@@ -2,9 +2,10 @@
   (:use clojure.test
         task01.core))
 
-(deftest count-test
-  (testing "Links count"
-    (is (= (count (get-links)) 10))))
+(deftest take-href-test
+  (testing "Take href argument from link"
+    (let [node [:h3 {} [:a {:href "http://clojure.org/"} "Clojure Language"]]]
+      (is (= (take-href node) "http://clojure.org/")))))
 
 (deftest count-test
   (testing "Links count"
