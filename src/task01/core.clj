@@ -3,7 +3,7 @@
   (:gen-class))
 
 (defn take-href [node]
-  "Takes link wrapper those with class 'r'.
+  "Takes link wrapper, those node with class 'r'.
    Finds there a link and returns its href attribute."
   (:href ((node 2) 1)))
 
@@ -25,7 +25,7 @@
 
 (defn find-in-children [acc node]
   "Accumulates all nodes with class 'r' into acc.
-   For this recursively calls link-wrappers."
+   To accomplish this it recursively calls link-wrappers."
   (let [found (link-wrappers node)]
     (if (empty? found) acc (concat acc found))))
 
